@@ -1,9 +1,9 @@
 package noxus_sdk
 
 import (
-	pb "code.aliyun.com/digital_campus/noxus/src/rpc/pb"
 	"time"
 	"context"
+	pb "github.com/zm-dev/noxus-go-sdk/pb"
 )
 
 type AppClient struct {
@@ -23,6 +23,15 @@ func (ac *AppClient) Validate(appID int32, appSecret string) (isValid bool, err 
 func (ac *AppClient) Find(appID int32) (*pb.Application, error) {
 	ctx, _ := context.WithTimeout(context.Background(), ac.timeout)
 	return ac.asc.Find(ctx, &pb.AppID{Id: appID})
+}
+
+func (ac *AppClient) List(perPage, page int32) ([]*pb.Application, error) {
+	ctx, _ := context.WithTimeout(context.Background(), ac.timeout)
+	appList, err := ac.asc.List(ctx, &pb.AppListReq{PerPage: perPage, Page: page})
+	if err != nil {
+		return nil, err
+	}
+	return appList.GetApps(), nil
 }
 
 func NewAppClient(timeout time.Duration) *AppClient {
