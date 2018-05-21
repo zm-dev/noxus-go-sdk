@@ -25,18 +25,26 @@ message AppID {
     int32 id = 1;
 }
 
+message ImageURL {
+    string original = 1;
+    string xs = 2;
+    string sm = 3;
+    string md = 4;
+    string lg = 5;
+}
 
 message Application {
     int32 id = 1;
     string logo_hash = 2;
-    int64 user_id = 3;
-    string url = 4;
-    string name = 5;
-    string description = 6;
-    bool revoked = 7;
-    int64 created_at = 8;
-    int64 updated_at = 9;
-    int64 deleted_at = 10;
+    ImageURL logo_url = 3;
+    int64 user_id = 4;
+    string url = 5;
+    string name = 6;
+    string description = 7;
+    bool revoked = 8;
+    int64 created_at = 9;
+    int64 updated_at = 10;
+    int64 deleted_at = 11;
 }
 
 

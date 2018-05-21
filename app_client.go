@@ -34,6 +34,6 @@ func (ac *AppClient) List(perPage, page int32) ([]*pb.Application, error) {
 	return appList.GetApps(), nil
 }
 
-func NewAppClient(timeout time.Duration) *AppClient {
-	return &AppClient{timeout: timeout}
+func NewAppClient(asc pb.AppServiceClient, timeout time.Duration) *AppClient {
+	return &AppClient{asc: asc, timeout: timeout}
 }
